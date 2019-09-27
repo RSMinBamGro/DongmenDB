@@ -9,33 +9,45 @@
  * 在现有create table基础上，修改代码以支持pk，fk，check，unique，not null约束。
  */
 
+/**
+ * "create table tableName (columnName dataType (size), ...)"
+ */
 sql_stmt_create *CreateParser::parse_sql_stmt_create() {
     char *tableName = NULL;
     map<string, FieldInfo *> *columns = new map<string, FieldInfo *>();
     vector<char*> fieldsName ;
-    if (!this->matchToken(TOKEN_RESERVED_WORD, "create")) {
+
+    /** "create" */
+    if (!this->matchToken(TOKEN_RESERVED_WORD, "create")) { // 判断是否匹配保留字
         return NULL;
     }
-    if (!this->matchToken( TOKEN_RESERVED_WORD, "table")) {
+
+    /** "table" */
+    if (!this->matchToken(TOKEN_RESERVED_WORD, "table")) {
         strcpy(this->parserMessage, "invalid sql: should be table.");
         return NULL;
     }
+
+    /** tableName */
     Token *token = this->parseNextToken();
-    if (token->type == TOKEN_WORD) {
+    if (token->type == TOKEN_WORD) { // 判断是否为非保留字
         tableName = new_id_name();
         strcpy(tableName, token->text);
-    } else {
+    } else { // 如果是保留字，则该表名不合法
         strcpy(this->parserMessage, "invalid sql: missing table name.");
         return NULL;
     }
-    token = this->parseEatAndNextToken();
-    if (!this->matchToken( TOKEN_OPEN_PAREN, "(")) {
+
+    /** "(" */
+    token = this->parseEatAndNextToken(); // 吃掉当前提取词，并获取下一个
+    if (!this->matchToken( TOKEN_OPEN_PAREN, "(")) { // 判断是否为 “(”
         strcpy(this->parserMessage, "invalid sql: missing (.");
         return NULL;
     }
-    token = this->parseNextToken();
 
-    while (token->type != TOKEN_CLOSE_PAREN) {
+    token = this->parseNextToken();
+    while (token->type != TOKEN_CLOSE_PAREN) { // 提取词若为左括号，则该表定义完成，循环结束
+        /** columnName dataType (size)*/
         FieldInfo *field = parse_sql_stmt_columnexpr();
         if (field == NULL) {
             break;
@@ -43,21 +55,27 @@ sql_stmt_create *CreateParser::parse_sql_stmt_create() {
             columns->insert(pair<string, FieldInfo *>(field->fieldName, field));
             fieldsName.push_back(field->fieldName);
         }
+
+        /** "," */
         token = this->parseNextToken();
-        if (token->type == TOKEN_COMMA) {
+        if (token->type == TOKEN_COMMA) { // 判断是否为 “,”
             token = this->parseEatAndNextToken();
         } else {
             break;
         }
     }
+
+    /** ")" */
     token = this->parseNextToken();
     if (!this->matchToken( TOKEN_CLOSE_PAREN, ")")) {
         strcpy(this->parserMessage, "invalid sql: missing ).");
         return NULL;
     }
+
     sql_stmt_create *sqlStmtCreate = (sql_stmt_create *)malloc(sizeof(sql_stmt_create));
     sqlStmtCreate->tableInfo =  new TableInfo(tableName, fieldsName, columns);
     sqlStmtCreate->constraints = NULL;
+
     return sqlStmtCreate;
 };
 
@@ -66,6 +84,8 @@ FieldInfo *CreateParser::parse_sql_stmt_columnexpr() {
     char *columnName = NULL;
     enum data_type type;
     int length;
+
+    /** columnName */
     if (token->type == TOKEN_WORD) {
         columnName = new_id_name();
         strcpy(columnName, token->text);
@@ -73,6 +93,8 @@ FieldInfo *CreateParser::parse_sql_stmt_columnexpr() {
         strcpy(this->parserMessage, "invalid sql: missing field name.");
         return NULL;
     }
+
+    /** dataType */
     token = this->parseEatAndNextToken();
     if (token->type == TOKEN_RESERVED_WORD) {
         if (stricmp(token->text, "int") == 0 || stricmp(token->text, "integer") == 0) {
@@ -81,7 +103,9 @@ FieldInfo *CreateParser::parse_sql_stmt_columnexpr() {
             token = this->parseEatAndNextToken();
         } else if (stricmp(token->text, "char") == 0) {
             type = DATA_TYPE_CHAR;
-            token = this->parseEatAndNextToken();
+            token = this->parseEatAndNextToken(); // 若类型为 char ，则还需继续解析指定的数据和藏毒
+
+            /** (data) */
             if (this->matchToken( TOKEN_OPEN_PAREN, "(")) {
                 token = this->parseNextToken();
                 if (token->type == TOKEN_DECIMAL) {
@@ -101,6 +125,7 @@ FieldInfo *CreateParser::parse_sql_stmt_columnexpr() {
                 strcpy(this->parserMessage, "invalid sql: missing char length.");
                 return NULL;
             }
+
         } else {
             strcpy(this->parserMessage, "invalid sql: wrong data type : ");
             strcat(this->parserMessage, token->text);
@@ -110,6 +135,7 @@ FieldInfo *CreateParser::parse_sql_stmt_columnexpr() {
         strcpy(this->parserMessage, "invalid sql : missing field name.");
         return NULL;
     }
+
     FieldInfo *field = new FieldInfo(type, length, columnName);
 
     return field;

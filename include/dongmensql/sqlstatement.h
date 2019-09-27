@@ -31,7 +31,7 @@ class Expression;
 
 class SQLStatement {
 public:
-    /*sql文本*/
+    /** sql文本 */
     char *text;
     sql_statement_type type;
 
@@ -60,8 +60,8 @@ public:
 class sql_stmt_update  : public SQLStatement {
 public:
     char *tableName;
-    vector<char*> fields; //set fields 被更新的字段列表
-    vector<Expression*> fieldsExpr;  //set fields expression 新值(表达式)列表
+    vector<char*> fields; // set fields 被更新的字段列表
+    vector<Expression*> fieldsExpr;  // set fields expression 新值(表达式)列表
     SRA_t *where;
 } ;
 

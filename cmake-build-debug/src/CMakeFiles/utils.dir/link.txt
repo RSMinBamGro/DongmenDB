@@ -1,0 +1,2 @@
+D:\Program-Files\MinGW\bin\ar.exe qc ..\..\lib\libutilsd.a  CMakeFiles/utils.dir/utils/utils.cpp.obj
+D:\Program-Files\MinGW\bin\ranlib.exe ..\..\lib\libutilsd.a

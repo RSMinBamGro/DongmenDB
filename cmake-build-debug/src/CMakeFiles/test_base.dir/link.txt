@@ -1,0 +1,2 @@
+D:\Program-Files\MinGW\bin\ar.exe qc ..\..\lib\libtest_based.a  CMakeFiles/test_base.dir/test_base/test_stmt_opimized.cpp.obj CMakeFiles/test_base.dir/test_base/test_stmt_parser.cpp.obj
+D:\Program-Files\MinGW\bin\ranlib.exe ..\..\lib\libtest_based.a

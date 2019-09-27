@@ -18,6 +18,38 @@
 
 /*TODO: parse_sql_stmt_update， update语句解析*/
 sql_stmt_update *UpdateParser::parse_sql_stmt_update() {
-//    fprintf(stderr, "TODO: update is not implemented yet. in parse_sql_stmt_update \n");
+    // fprintf(stderr, "TODO: update is not implemented yet. in parse_sql_stmt_update \n");
 
+    char *tableName = nullptr;
+    vector<char*> fields; // 被更新的字段列表
+    vector<Expression*> fieldsExpr;  // 新值(表达式)列表
+    SRA_t *where;
+
+
+    /** "update" */
+    if (!this->matchToken(TOKEN_RESERVED_WORD, "update"))
+        return nullptr;
+
+    /** tableName */
+    Token *token = this->parseNextToken();
+    if (token->type == TOKEN_WORD) { // 判断是否为非保留字
+        tableName = new_id_name();
+        strcpy(tableName, token->text);
+    } else { // 如果是保留字，则该表名不合法
+        strcpy(this->parserMessage, "invalid sql: missing table name.");
+        return NULL;
+    }
+
+    /** "set" */
+    token = this->parseEatAndNextToken();
+    if (!this->matchToken(TOKEN_RESERVED_WORD, "set"))
+        return nullptr;
+
+    /** columnName=expr */
+
+    /** "where" */
+    if(!this->matchToken(TOKEN_RESERVED_WORD, "where"))
+        return nullptr;
+
+    /** columnName=expr */
 };

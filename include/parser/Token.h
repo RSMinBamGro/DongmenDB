@@ -10,18 +10,18 @@
 
 /*与operators中的排序一致，方便按照顺序访问operators*/
 typedef enum TokenType_ {
-    TOKEN_OPEN_PAREN = 0,
-    TOKEN_CLOSE_PAREN,
+    TOKEN_OPEN_PAREN = 0,       // "("
+    TOKEN_CLOSE_PAREN,          // ")"
     TOKEN_POWER,
     TOKEN_PLUS,
     TOKEN_MINUS,
     TOKEN_DIVIDE,
     TOKEN_MULTIPLY,
-    TOKEN_LT,              //less-than operator
+    TOKEN_LT,                   //less-than operator
     TOKEN_GT,
     TOKEN_EQ,
     TOKEN_NOT_EQUAL,
-    TOKEN_LE,               //less-than-or-equal-to operator"
+    TOKEN_LE,                   //less-than-or-equal-to operator"
     TOKEN_GE,
     TOKEN_IN,
     TOKEN_LIKE,
@@ -30,11 +30,11 @@ typedef enum TokenType_ {
     TOKEN_NOT,
     TOKEN_ASSIGNMENT,
     TOKEN_FUN,
-    TOKEN_COMMA,      /*以上是操作符，在表达式解析时使用*/
+    TOKEN_COMMA,                /*以上是操作符，在表达式解析时使用*/
 
-    TOKEN_INVALID, //"invalid token"
-    TOKEN_RESERVED_WORD,
-    TOKEN_WORD,
+    TOKEN_INVALID,              // "invalid token"
+    TOKEN_RESERVED_WORD,        // reserved words，sql 中的保留字
+    TOKEN_WORD,                 // 非保留字的词
     TOKEN_UNENDED_SRING,
     TOKEN_STRING,
     TOKEN_MOD,
@@ -44,10 +44,10 @@ typedef enum TokenType_ {
     TOKEN_SEMICOLON,
     TOKEN_EXP_FLOAT,
     TOKEN_FLOAT,
-    TOKEN_OCTAL,               //"octal integer"
-    TOKEN_HEX,                 //"hexadecimal integer"
-    TOKEN_DECIMAL,            //"decimal integer"
-    TOKEN_ZERO,               //"zero integer"
+    TOKEN_OCTAL,                // "octal integer"
+    TOKEN_HEX,                  // "hexadecimal integer"
+    TOKEN_DECIMAL,              // "decimal integer"
+    TOKEN_ZERO,                 // "zero integer"
     TOKEN_NULL
 } TokenType;
 
