@@ -31,30 +31,30 @@ typedef enum TokenType_ {
     TOKEN_NOT,               //匹配not
     TOKEN_ASSIGNMENT,        //赋值
     TOKEN_FUN,               //函数
-    TOKEN_COMMA,             /*以上是操作符，在表达式解析时使用*/ //逗号
-
+    TOKEN_COMMA,             //逗号
+                             /*以上是操作符，在表达式解析时使用*/
     TOKEN_INVALID, //"invalid token"
-    TOKEN_RESERVED_WORD,  //sql中的保留字，比如create,set,where 等等
-    TOKEN_WORD,           //非保留字的词
-    TOKEN_UNENDED_SRING,  //没有结尾的字符串
-    TOKEN_STRING,         //字符串
-    TOKEN_MOD,            //模
-    TOKEN_INCOMPLETE_CHAR,//不完整的字符
-    TOKEN_CHAR,           //字符
-    TOKEN_INVALID_CHAR,   //非法字符
-    TOKEN_SEMICOLON,      //分号
+    TOKEN_RESERVED_WORD,     //sql 中的保留字，比如 create,set,where 等等
+    TOKEN_WORD,              //非保留字的词
+    TOKEN_UNENDED_SRING,     //没有结尾的字符串
+    TOKEN_STRING,            //字符串
+    TOKEN_MOD,               //模
+    TOKEN_INCOMPLETE_CHAR,   //不完整的字符
+    TOKEN_CHAR,              //字符
+    TOKEN_INVALID_CHAR,      //非法字符
+    TOKEN_SEMICOLON,         //分号
     TOKEN_EXP_FLOAT,
     TOKEN_FLOAT,
-    TOKEN_OCTAL,               //"octal integer"
-    TOKEN_HEX,                 //"hexadecimal integer"
-    TOKEN_DECIMAL,            //"decimal integer"
-    TOKEN_ZERO,               //"zero integer"
-    TOKEN_NULL                 //匹配null
+    TOKEN_OCTAL,             //"octal integer"
+    TOKEN_HEX,               //"hexadecimal integer"
+    TOKEN_DECIMAL,           //"decimal integer"
+    TOKEN_ZERO,              //"zero integer"
+    TOKEN_NULL               //匹配 null
 } TokenType;
 ```
 
 ```cpp
-//sql中的保留字
+//sql 中的保留字
 const char *reservedWords[] = {
             "select", "from", "where", "order", "by", "group", "create", "table", "index",
             "and", "not", "or", "null",            "like", "in", "grant", "integer", "int",
@@ -130,12 +130,12 @@ SRA_t *SRASelect(SRA_t *sra, Expression *cond);
 
 常用函数：
 
-- `push_back(elem);` //向 vector 尾部加入数据
-- `Expression *Parser::parseExpressionRD();` //递归下降法解析表达式 详情看 `src/parser/parser.cpp` 中
-- `SRA_t *SRATable(TableReference_t *ref);` // `SRA_TABLE` 构造函数
-- `SRA_t *SRASelect(SRA_t *sra, Expression *cond);` // `SRA_SELECT` 构造函数
-- `Expression *expression_print(Expression *expr, char *desc);`  //输出 `Expression` 对象的数据（调试用）
-- `void SRA_print(SRA_t *sra);`  //输出 `SRA_t` 中的数据（调试用）
+- `push_back(elem);`                                                //向 vector 尾部加入数据
+- `Expression *Parser::parseExpressionRD();`                        //递归下降法解析表达式 详情看 `src/parser/parser.cpp` 中
+- `SRA_t *SRATable(TableReference_t *ref);`                         // `SRA_TABLE` 构造函数
+- `SRA_t *SRASelect(SRA_t *sra, Expression *cond);`                 // `SRA_SELECT` 构造函数
+- `Expression *expression_print(Expression *expr, char *desc);`     //输出 `Expression` 对象的数据（调试用）
+- `void SRA_print(SRA_t *sra);`                                     //输出 `SRA_t` 中的数据（调试用）
 
 ## 2.2 update 语句执行
 
