@@ -91,10 +91,10 @@ const char *reservedWords[] = {
 ```cpp
 class sql_stmt_update  : public SQLStatement {
 public:
-    char *tableName;    //保存上面update语句的student
-    vector<char*> fields; //set fields 被更新的字段列表,保存上面update语句的sage
-    vector<Expression*> fieldsExpr;  //set fields expression 新值(或表达式)列表,保存上面update语句的20
-    SRA_t *where;   //保存上面update语句的 sage=22
+    char *tableName;                    //保存上面update语句的student
+    vector<char*> fields;               //set fields 被更新的字段列表,保存上面update语句的sage
+    vector<Expression*> fieldsExpr;     //set fields expression 新值(或表达式)列表,保存上面update语句的20
+    SRA_t *where;                       //保存上面update语句的 sage=22
 } ;
 ```
 
