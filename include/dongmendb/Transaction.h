@@ -39,6 +39,7 @@ public:
 
 } ;
 
+/** Transaction 即事务 */
 class Transaction {
 public:
     DongmenDB *db;

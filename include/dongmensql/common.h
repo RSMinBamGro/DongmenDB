@@ -51,6 +51,8 @@ enum data_type {
 /**
  * 定义物理计划的数据结构和接口函数.
  */
+
+/** variant 为存储可变表达式值的结构体*/
 typedef struct variant_ {
     enum data_type type;
     union {

@@ -20,6 +20,11 @@
 sql_stmt_update *UpdateParser::parse_sql_stmt_update() {
     // fprintf(stderr, "TODO: update is not implemented yet. in parse_sql_stmt_update \n");
 
+    /**
+     * 需要及时通过方法 this->parseNextToken() 和 this->parseEatAndNextToken() 将要解析的词存入 token
+     * 可以通过方法 fprintf(stdout, "str") 对程序进行插桩以测试运行过程
+     */
+
     /** 匹配保留字 update */
     if (!this->matchToken(TOKEN_RESERVED_WORD, "update"))
         return nullptr;
@@ -53,7 +58,6 @@ sql_stmt_update *UpdateParser::parse_sql_stmt_update() {
     vector<Expression*> fieldsExpr;  // 新值(表达式)列表
     if (token->type == TOKEN_WORD) {
         while (token->type == TOKEN_WORD) {
-            token = this->parseNextToken();
             char *fieldName = new_id_name();
             strcpy(fieldName, token->text);
 
@@ -83,7 +87,7 @@ sql_stmt_update *UpdateParser::parse_sql_stmt_update() {
     }
 
 
-    /** 匹配分号 */
+    /** 匹配分号，SQL 中的 update 语句可能不含 where 子句 */
     token = this->parseNextToken();
     if (token == NULL || token->type == TOKEN_SEMICOLON) {
         sql_stmt_update *sqlStmtUpdate = (sql_stmt_update *)calloc(sizeof(sql_stmt_update), 1);
@@ -109,9 +113,10 @@ sql_stmt_update *UpdateParser::parse_sql_stmt_update() {
     }
 
 
+    /** 打包解析结果 */
     SRA_t *select = SRASelect(table, whereExpr);
 
-    sql_stmt_update *sqlStmtUpdate = (sql_stmt_update *)calloc(sizeof(sql_stmt_update),1);
+    sql_stmt_update *sqlStmtUpdate = (sql_stmt_update *)calloc(sizeof(sql_stmt_update), 1);
     sqlStmtUpdate->tableName = tableName;
     sqlStmtUpdate->fields = fields;
     sqlStmtUpdate->fieldsExpr = fieldsExpr;

@@ -15,7 +15,7 @@
 /*TODO: plan_execute_update， update语句执行*/
 
 
-int ExecutionPlan::executeUpdate(DongmenDB *db, sql_stmt_update *sqlStmtUpdate, Transaction *tx){ /// 值为 Transaction 的参数是代表事务的参数
+int ExecutionPlan::executeUpdate(DongmenDB *db, sql_stmt_update *sqlStmtUpdate, Transaction *tx) {
     /** 更新语句以 select 的物理操作为基础实现。
      * 1. 使用 sql_stmt_update 的条件参数，调用 physical_scan_select_create 创建 select 的物理计划并初始化;
      * 2. 执行 select 的物理计划，完成update操作
@@ -35,10 +35,10 @@ int ExecutionPlan::executeUpdate(DongmenDB *db, sql_stmt_update *sqlStmtUpdate, 
         for (size_t i = 0; i < sqlStmtUpdate->fields.size(); i ++) {
             char* fieldName = sqlStmtUpdate->fields.at(i);
 
-            variant *var = (variant*)calloc(sizeof(variant), 1); /// variant 为可变表达式结构体，用以保存新值表达式的值
+            variant *var = (variant*)calloc(sizeof(variant), 1); /// 用以保存新值表达式的值
             enum data_type field_type = scan->getField(sqlStmtUpdate->tableName, fieldName)->type;
 
-            scan->evaluateExpression(sqlStmtUpdate->fieldsExpr.at(i), scan, var);/// 计算新值表达式的值
+            scan->evaluateExpression(sqlStmtUpdate->fieldsExpr.at(i), scan, var);/// 计算新值表达式的值并存入 var 中
 
             /** 判断数据类型是否匹配 */
             if(var->type != field_type) { /// 若不匹配则报错
@@ -48,7 +48,7 @@ int ExecutionPlan::executeUpdate(DongmenDB *db, sql_stmt_update *sqlStmtUpdate, 
 
             if(var->type == DATA_TYPE_INT) { /// 若值为整型
                 scan->setInt(sqlStmtUpdate->tableName, fieldName, var->intValue);
-            } else if (var->type == DATA_TYPE_CHAR) {
+            } else if (var->type == DATA_TYPE_CHAR) { /// 若值为字符串型
                 scan->setString(sqlStmtUpdate->tableName, fieldName, var->strValue);
 
                 /** 若字符串值的长度超过定义长度，需要进行截取 */
@@ -62,6 +62,6 @@ int ExecutionPlan::executeUpdate(DongmenDB *db, sql_stmt_update *sqlStmtUpdate, 
     // select->close();
     scan->close();
 
-    fprintf(stdout, "%d", count_updated);
+    // fprintf(stdout, "%d", count_updated);
     return count_updated;
 };
