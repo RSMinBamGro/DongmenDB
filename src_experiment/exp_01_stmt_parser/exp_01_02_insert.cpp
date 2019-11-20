@@ -11,25 +11,29 @@
  */
 
 /**
- * insert into tableName(f1,f2,...,fn) values(v1,v2,...,vn);
+ * 支持的 insert 语法：
+ *
+ * insert into <tableName>(f1,f2,...,fn) values(v1,v2,...,vn);
+ *
  */
+
 sql_stmt_insert *InsertParser::parse_sql_stmt_insert() {
     char *tableName = NULL;
     vector<char*> fields ;
     vector<variant*> values ;
 
-    /** "insert" */
+    /** 匹配保留字 insert */
     if (!this->matchToken( TOKEN_RESERVED_WORD, "insert")) {
         return NULL;
     }
 
-    /** "into" */
+    /** 匹配保留字 into */
     if (!this->matchToken( TOKEN_RESERVED_WORD, "into")) {
         strcpy(this->parserMessage, "invalid sql: should be into.");
         return NULL;
     }
 
-    /** tableName */
+    /** 解析表名 */
     Token *token = this->parseNextToken();
     if (token->type == TOKEN_WORD) {
         tableName = new_id_name();
@@ -39,14 +43,14 @@ sql_stmt_insert *InsertParser::parse_sql_stmt_insert() {
         return NULL;
     }
 
-    /** "(" */
+    /** 匹配括号 ( */
     token = this->parseEatAndNextToken();
     if (!this->matchToken( TOKEN_OPEN_PAREN, "(")) {
         strcpy(this->parserMessage, "invalid sql: missing (.");
         return NULL;
     }
 
-    /** f1,f2,...,fn */
+    /** 解析字段名列表 */
     token = this->parseNextToken();
     if (token->type == TOKEN_WORD) {
         while (token->type == TOKEN_WORD) {
@@ -55,7 +59,7 @@ sql_stmt_insert *InsertParser::parse_sql_stmt_insert() {
             fields.push_back(fieldName);
             token = this->parseEatAndNextToken();
 
-            /** "," */
+            /** 匹配逗号 , */
             if (token->type==TOKEN_COMMA){
                 token = this->parseEatAndNextToken();
             }else{
@@ -67,25 +71,26 @@ sql_stmt_insert *InsertParser::parse_sql_stmt_insert() {
         return NULL;
     }
 
-    /** ")" */
+    /** 匹配括号 ) */
     if (!this->matchToken( TOKEN_CLOSE_PAREN, ")")) {
         strcpy(this->parserMessage, "invalid sql: missing ).");
         return NULL;
     }
 
-    /** "values" */
+
+    /** 匹配保留字 values */
     if (!this->matchToken( TOKEN_RESERVED_WORD, "values")) {
         strcpy(this->parserMessage, "invalid sql: missing values.");
         return NULL;
     }
 
-    /** "(" */
+    /** 匹配括号 ( */
     if (!this->matchToken( TOKEN_OPEN_PAREN, "(")) {
         strcpy(this->parserMessage, "invalid sql: missing (.");
         return NULL;
     }
 
-    /** v1,v2,vn */
+    /** 解析要插入的数据列表 */
     token = this->parseNextToken();
     if (token->type == TOKEN_STRING || token->type == TOKEN_DECIMAL) {
         while (token->type == TOKEN_STRING || token->type == TOKEN_DECIMAL) { // 当提取到 “）” 时退出循环
@@ -113,7 +118,7 @@ sql_stmt_insert *InsertParser::parse_sql_stmt_insert() {
         return NULL;
     }
 
-    /** ")" */
+    /** 匹配括号 ) */
     if (!this->matchToken( TOKEN_CLOSE_PAREN, ")")) {
         strcpy(this->parserMessage, "invalid sql: missing ).");
         return NULL;

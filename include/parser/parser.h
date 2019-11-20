@@ -11,10 +11,9 @@
 #include <dongmensql/column.h>
 #include <dongmendb/SecurityManager.h>
 
-/*
+/**
  * 定义parser的基础数据结构和共用的函数
- *
- * */
+ */
 
 #define PARSER_MESSAGE_LENTTH 128
 

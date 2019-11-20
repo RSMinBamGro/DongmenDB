@@ -168,40 +168,6 @@ dongmensql/column.h
 dongmendb/SecurityManager.h
 -
 
-../include/physicalplan/ExecutionPlan.h
-dongmendb/DongmenDB.h
--
-relationalalgebra/sra.h
--
-dongmensql/sqlstatement.h
--
-physicalplan/Scan.h
--
-
-../include/physicalplan/Join.h
-physicalplan/Scan.h
--
-
-../include/physicalplan/Project.h
-physicalplan/Scan.h
--
-
-../include/physicalplan/Scan.h
-string
--
-dongmendb/DongmenDB.h
--
-dongmensql/expression.h
--
-
-../include/physicalplan/Select.h
-physicalplan/Scan.h
--
-
-../include/physicalplan/TableScan.h
-physicalplan/Scan.h
--
-
 ../include/relationalalgebra/ra.h
 dongmensql/expression.h
 ../include/relationalalgebra/dongmensql/expression.h
@@ -220,93 +186,9 @@ vector
 
 ../include/utils/utils.h
 
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/parser/Tokenizer.cpp
-stdio.h
--
-stdlib.h
--
-ctype.h
--
-string.h
--
-assert.h
--
-parser/Tokenizer.h
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/parser/parser/Tokenizer.h
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/parser/parser.cpp
-string.h
--
-parser/Tokenizer.h
--
-parser/parser.h
--
-dongmensql/expression.h
--
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_01_stmt_parser/exp_01_01_create_table.cpp
-parser/StatementParser.h
--
-dongmensql/sqlstatement.h
--
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_01_stmt_parser/exp_01_02_insert.cpp
-dongmensql/sqlstatement.h
--
-parser/parser.h
--
-utils/utils.h
--
-parser/StatementParser.h
--
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_01_stmt_parser/exp_01_03_select.cpp
-relationalalgebra/sra.h
--
-dongmensql/sqlstatement.h
--
-parser/StatementParser.h
--
-
 D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_01_stmt_parser/exp_01_04_update.cpp
 dongmensql/sqlstatement.h
 -
 parser/StatementParser.h
--
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_01_stmt_parser/exp_01_05_delete.cpp
-dongmensql/sqlstatement.h
--
-parser/StatementParser.h
--
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_04_security/exp_04_01_security_parser.cpp
-parser/parser.h
--
-dongmendb/SecurityManager.h
--
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_07_physical_operate/exp_07_05_update.cpp
-physicalplan/ExecutionPlan.h
--
-physicalplan/TableScan.h
--
-physicalplan/Select.h
--
-physicalplan/Project.h
--
-physicalplan/Join.h
--
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_07_physical_operate/exp_07_06_delete.cpp
-physicalplan/ExecutionPlan.h
--
-physicalplan/TableScan.h
--
-physicalplan/Select.h
--
-physicalplan/Project.h
--
-physicalplan/Join.h
 -
 

@@ -41,7 +41,7 @@ typedef enum TokenType_ {
     TOKEN_INCOMPLETE_CHAR,
     TOKEN_CHAR,
     TOKEN_INVALID_CHAR,
-    TOKEN_SEMICOLON,
+    TOKEN_SEMICOLON,            // 分号
     TOKEN_EXP_FLOAT,
     TOKEN_FLOAT,
     TOKEN_OCTAL,                // "octal integer"

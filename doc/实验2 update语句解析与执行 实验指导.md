@@ -53,6 +53,7 @@ typedef enum TokenType_ {
 } TokenType;
 ```
 
+保留字定义在 `/src/parser/tokenizer.cpp` 中
 ```cpp
 //sql 中的保留字
 const char *reservedWords[] = {
@@ -73,7 +74,7 @@ const char *reservedWords[] = {
 对解析器中 token(词）的`TokenType`和`text`进行检查，如果匹配成功，就**直接获取下一个词放入解析器中**，否则输出错误信息，返回 NULL，不对解析器中的词修改
 
 `Token *Parser::parseNextToken()`
-首先判断当前解析器中的词是否为 NULL,如果是，就获取下一个 token;否则就返回当前词
+首先判断当前解析器中的词是否为 NULL ,如果是，就获取下一个 token ；否则就返回当前词
 
 `Token *Parser::parseEatToken()`
 在解析完当前词之后，将当前解析器中的 token(词)置为 NULL

@@ -87,7 +87,7 @@ int Parser::matchToken( TokenType type, char *text){
 
 
 
-/*使用递归下降法解析表达式
+/** 使用递归下降法解析表达式
  *
  * 支持：
  * 算术运算 + - * /
@@ -103,7 +103,7 @@ int Parser::matchToken( TokenType type, char *text){
  * 此功能属于语法检查，尚不支持语义检查。比如函数操作符操作数类型匹配，函数传参类型匹配检查等。
  *
  * 入口函数：parseExpressionRD
- * */
+ */
 
 
 Expression *Parser::parseExpressionRD() {
@@ -111,7 +111,7 @@ Expression *Parser::parseExpressionRD() {
     if (this->parserStateType != PARSER_WRONG && this->currToken != NULL
         && this->currToken->type != TOKEN_RESERVED_WORD && this->currToken->type != TOKEN_COMMA &&
         this->currToken->type != TOKEN_SEMICOLON) {
-        /*表达式没有处理完，比如只有右括号的情况。*/
+        /* 表达式没有处理完，比如只有右括号的情况 */
         char message[PARSER_MESSAGE_LENTTH];
         sprintf(message, "syntax error: %s.", this->currToken->text);
         parseError(message);
@@ -399,6 +399,7 @@ Expression *Parser::parseReadExpr() {
     } else {
         expr0 = parseReadTerm();
     }
+
     /*需要递归处理，连续的+-操作*/
     token = parseNextToken();
 

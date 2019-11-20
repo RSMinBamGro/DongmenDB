@@ -116,10 +116,13 @@ public:
     union {
         /*标识符：表名等*/
         char *id;
+
         /*常量*/
         Literal *val;
+
         /*字段变量*/
         ColumnReference *ref;
+
         /*函数*/
         Func f;
     };
@@ -127,12 +130,14 @@ public:
 
 class Expression {
 public:
-    /*当term不为空时，表示是term*/
+    /* 当term不为空时，表示是term */
     TokenType opType;
     TermExpr *term;
-    /*如果出现在select子句中，则可以有别名*/
+
+    /* 如果出现在select子句中，则可以有别名 */
     char *alias;
-    /*按链表顺序存操作数*/
+
+    /* 按链表顺序存操作数 */
     Expression *nextexpr;
 
 

@@ -10,25 +10,29 @@
  */
 
 /**
- * "create table tableName (columnName dataType (size), ...)"
+ * 支持的 create 语法：
+ *
+ * "create table <tableName> (<columnName> <dataType> (<size>)[, ...])"
+ *
  */
+
 sql_stmt_create *CreateParser::parse_sql_stmt_create() {
     char *tableName = NULL;
     map<string, FieldInfo *> *columns = new map<string, FieldInfo *>();
     vector<char*> fieldsName ;
 
-    /** "create" */
+    /** 匹配保留字 create */
     if (!this->matchToken(TOKEN_RESERVED_WORD, "create")) { // 判断是否匹配保留字
         return NULL;
     }
 
-    /** "table" */
+    /** 匹配保留字 table */
     if (!this->matchToken(TOKEN_RESERVED_WORD, "table")) {
         strcpy(this->parserMessage, "invalid sql: should be table.");
         return NULL;
     }
 
-    /** tableName */
+    /** 解析表名 */
     Token *token = this->parseNextToken();
     if (token->type == TOKEN_WORD) { // 判断是否为非保留字
         tableName = new_id_name();
@@ -38,7 +42,7 @@ sql_stmt_create *CreateParser::parse_sql_stmt_create() {
         return NULL;
     }
 
-    /** "(" */
+    /** 匹配括号 ( */
     token = this->parseEatAndNextToken(); // 吃掉当前提取词，并获取下一个
     if (!this->matchToken( TOKEN_OPEN_PAREN, "(")) { // 判断是否为 “(”
         strcpy(this->parserMessage, "invalid sql: missing (.");
@@ -47,7 +51,7 @@ sql_stmt_create *CreateParser::parse_sql_stmt_create() {
 
     token = this->parseNextToken();
     while (token->type != TOKEN_CLOSE_PAREN) { // 提取词若为左括号，则该表定义完成，循环结束
-        /** columnName dataType (size)*/
+        /** 解析字段定义语句 */
         FieldInfo *field = parse_sql_stmt_columnexpr();
         if (field == NULL) {
             break;
@@ -56,7 +60,7 @@ sql_stmt_create *CreateParser::parse_sql_stmt_create() {
             fieldsName.push_back(field->fieldName);
         }
 
-        /** "," */
+        /** 匹配逗号 , */
         token = this->parseNextToken();
         if (token->type == TOKEN_COMMA) { // 判断是否为 “,”
             token = this->parseEatAndNextToken();
@@ -65,7 +69,7 @@ sql_stmt_create *CreateParser::parse_sql_stmt_create() {
         }
     }
 
-    /** ")" */
+    /** 匹配括号 ) */
     token = this->parseNextToken();
     if (!this->matchToken( TOKEN_CLOSE_PAREN, ")")) {
         strcpy(this->parserMessage, "invalid sql: missing ).");
@@ -85,7 +89,7 @@ FieldInfo *CreateParser::parse_sql_stmt_columnexpr() {
     enum data_type type;
     int length;
 
-    /** columnName */
+    /** 解析字段名 */
     if (token->type == TOKEN_WORD) {
         columnName = new_id_name();
         strcpy(columnName, token->text);
@@ -94,7 +98,7 @@ FieldInfo *CreateParser::parse_sql_stmt_columnexpr() {
         return NULL;
     }
 
-    /** dataType */
+    /** 解析字段数据类型 */
     token = this->parseEatAndNextToken();
     if (token->type == TOKEN_RESERVED_WORD) {
         if (stricmp(token->text, "int") == 0 || stricmp(token->text, "integer") == 0) {
@@ -105,7 +109,7 @@ FieldInfo *CreateParser::parse_sql_stmt_columnexpr() {
             type = DATA_TYPE_CHAR;
             token = this->parseEatAndNextToken(); // 若类型为 char ，则还需继续解析指定的数据和藏毒
 
-            /** (data) */
+            /** 解析字段取值范围*/
             if (this->matchToken( TOKEN_OPEN_PAREN, "(")) {
                 token = this->parseNextToken();
                 if (token->type == TOKEN_DECIMAL) {
