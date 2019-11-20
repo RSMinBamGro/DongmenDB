@@ -25,7 +25,7 @@ Parser::Parser(Tokenizer *tokenizer) {
  * @param parser 解析器
  * @return Token
  */
-Token *Parser::parseNextToken() {
+Token *Parser::parseNextToken () {
     if (this->parserStateType == PARSER_WRONG) {
         return NULL;
     }
@@ -40,7 +40,7 @@ Token *Parser::parseNextToken() {
  * @param parser  解析器
  * @return  NULL
  */
-Token *Parser::parseEatToken() {
+Token *Parser::parseEatToken () {
     if (this->parserStateType == PARSER_WRONG) {
         return NULL;
     }
@@ -53,7 +53,7 @@ Token *Parser::parseEatToken() {
  * @param parser
  * @return
  */
-Token *Parser::parseEatAndNextToken() {
+Token *Parser::parseEatAndNextToken () {
     if (this->parserStateType == PARSER_WRONG) {
         return NULL;
     }
@@ -67,13 +67,13 @@ Token *Parser::parseEatAndNextToken() {
  * @param message 错误消息
  * @return NULL
  */
-void *Parser::parseError( char *message) {
+void *Parser::parseError ( char *message) {
     strcpy(this->parserMessage, message);
     this->parserStateType = PARSER_WRONG;
     return NULL;
 };
 
-int Parser::matchToken( TokenType type, char *text){
+int Parser::matchToken (TokenType type, char *text){
     Token *token = parseNextToken();
     if (token && token->type == type && stricmp(token->text, text) == 0) {
         parseEatAndNextToken();
