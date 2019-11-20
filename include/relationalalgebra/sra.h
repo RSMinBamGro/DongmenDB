@@ -110,13 +110,14 @@ typedef struct SRA_Binary_s {
     SRA_t *sra1, *sra2;
 } SRA_Binary_t;
 
+/** 表示关系代数的结构体 */
 struct SRA_s {
     enum SRAType t;
     union {
         SRA_Table_t table;
-        SRA_Project_t project;
-        SRA_Select_t select;
-        SRA_Join_t join;
+        SRA_Project_t project; /// 投影
+        SRA_Select_t select;   /// 选择
+        SRA_Join_t join;       /// 连接
         SRA_Binary_t binary;
     };
 };
