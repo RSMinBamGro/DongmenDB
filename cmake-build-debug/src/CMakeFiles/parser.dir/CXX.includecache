@@ -142,6 +142,10 @@ dongmendb/SecurityManager.h
 vector
 -
 
+../include/parser/StatementParser.h
+dongmensql/sqlstatement.h
+-
+
 ../include/parser/Token.h
 stdlib.h
 -
@@ -164,40 +168,6 @@ dongmensql/column.h
 dongmendb/SecurityManager.h
 -
 
-../include/physicalplan/ExecutionPlan.h
-dongmendb/DongmenDB.h
--
-relationalalgebra/sra.h
--
-dongmensql/sqlstatement.h
--
-physicalplan/Scan.h
--
-
-../include/physicalplan/Join.h
-physicalplan/Scan.h
--
-
-../include/physicalplan/Project.h
-physicalplan/Scan.h
--
-
-../include/physicalplan/Scan.h
-string
--
-dongmendb/DongmenDB.h
--
-dongmensql/expression.h
--
-
-../include/physicalplan/Select.h
-physicalplan/Scan.h
--
-
-../include/physicalplan/TableScan.h
-physicalplan/Scan.h
--
-
 ../include/relationalalgebra/ra.h
 dongmensql/expression.h
 ../include/relationalalgebra/dongmensql/expression.h
@@ -216,15 +186,9 @@ vector
 
 ../include/utils/utils.h
 
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_07_physical_operate/exp_07_05_update.cpp
-physicalplan/ExecutionPlan.h
+D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_01_stmt_parser/exp_01_05_delete.cpp
+dongmensql/sqlstatement.h
 -
-physicalplan/TableScan.h
--
-physicalplan/Select.h
--
-physicalplan/Project.h
--
-physicalplan/Join.h
+parser/StatementParser.h
 -
 

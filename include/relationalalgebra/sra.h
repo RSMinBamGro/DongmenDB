@@ -59,17 +59,17 @@ typedef struct JoinCondition_s JoinCondition_t;
 typedef struct TableReference_s TableReference_t;
 
 enum SRAType {
-    SRA_TABLE,
-    SRA_PROJECT,
-    SRA_SELECT,
-    SRA_NATURAL_JOIN,
-    SRA_JOIN,
-    SRA_FULL_OUTER_JOIN,
-    SRA_LEFT_OUTER_JOIN,
-    SRA_RIGHT_OUTER_JOIN,
-    SRA_UNION,
-    SRA_EXCEPT,
-    SRA_INTERSECT
+    SRA_TABLE,            /** 数据表 */
+    SRA_PROJECT,          /** 投影 */
+    SRA_SELECT,           /** 选择 */
+    SRA_NATURAL_JOIN,     /** 自然连接 */
+    SRA_JOIN,             /** theta 连接 */
+    SRA_FULL_OUTER_JOIN,  /** 全外连接 */
+    SRA_LEFT_OUTER_JOIN,  /** 左外连接 */
+    SRA_RIGHT_OUTER_JOIN, /** 右外连接 */
+    SRA_UNION,            /** 集合并 */
+    SRA_EXCEPT,           /** 集合差 */
+    SRA_INTERSECT         /** 集合交 */
 };
 
 enum OJType {
@@ -79,6 +79,7 @@ enum OrderBy {
     ORDER_BY_ASC, ORDER_BY_DESC
 };
 
+/** 以下结构体定义了了关系运算操作的输入 */
 typedef struct SRA_Table_s {
     TableReference_t *ref; /* TableReference_t defined in create.h */
 } SRA_Table_t;
@@ -110,14 +111,14 @@ typedef struct SRA_Binary_s {
     SRA_t *sra1, *sra2;
 } SRA_Binary_t;
 
-/** 表示关系代数的结构体 */
+/** 表示关系代数语法树的结构体 */
 struct SRA_s {
-    enum SRAType t;
-    union {
+    enum SRAType t; /** 当前关系运算的类型 */
+    union { /** 联合体用于多个基本数据类型或复合数据结构要占用同一片内存的情况。在某一时刻，一个union中只能有一个值是有效的（n 选 1） */
         SRA_Table_t table;
-        SRA_Project_t project; /// 投影
-        SRA_Select_t select;   /// 选择
-        SRA_Join_t join;       /// 连接
+        SRA_Project_t project;
+        SRA_Select_t select;
+        SRA_Join_t join;
         SRA_Binary_t binary;
     };
 };
