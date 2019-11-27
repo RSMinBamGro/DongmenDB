@@ -112,10 +112,10 @@ sql_stmt_update *UpdateParser::parse_sql_stmt_update() {
         return NULL;
     }
 
-
-    /** 打包解析结果 */
     SRA_t *select = SRASelect(table, whereExpr);
 
+
+    /** 打包解析结果 */
     sql_stmt_update *sqlStmtUpdate = (sql_stmt_update *)calloc(sizeof(sql_stmt_update), 1);
     sqlStmtUpdate->tableName = tableName;
     sqlStmtUpdate->fields = fields;
