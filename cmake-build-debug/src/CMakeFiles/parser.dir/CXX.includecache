@@ -186,8 +186,12 @@ vector
 
 ../include/utils/utils.h
 
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_01_stmt_parser/exp_01_05_delete.cpp
+D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_01_stmt_parser/exp_01_02_insert.cpp
 dongmensql/sqlstatement.h
+-
+parser/parser.h
+-
+utils/utils.h
 -
 parser/StatementParser.h
 -

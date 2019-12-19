@@ -188,42 +188,6 @@ vector
 
 ../include/utils/utils.h
 
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/dongmensql/column.cpp
-dongmensql/column.h
--
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/dongmensql/common.cpp
-dongmensql/common.h
--
-relationalalgebra/sra.h
--
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/dongmensql/create.cpp
-dongmensql/create.h
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/dongmensql/dongmensql/create.h
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/dongmensql/expression.cpp
-dongmensql/column.h
--
-dongmensql/expression.h
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/dongmensql/dongmensql/expression.h
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/dongmensql/ra.cpp
-relationalalgebra/ra.h
--
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/dongmensql/sqlstatement.cpp
-malloc.h
--
-dongmensql/sqlstatement.h
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/dongmensql/dongmensql/sqlstatement.h
-
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/dongmensql/sra.cpp
-relationalalgebra/sra.h
--
-dongmensql/expression.h
-D:/Program Files/JetBrains/ClionProjects/DongmenDB/src/dongmensql/dongmensql/expression.h
-
 D:/Program Files/JetBrains/ClionProjects/DongmenDB/src_experiment/exp_05_algebra_opt/exp_05_02_condition_push_down.cpp
 relationalalgebra/optimizer.h
 -
