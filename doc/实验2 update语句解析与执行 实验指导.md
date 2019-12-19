@@ -33,7 +33,8 @@ typedef enum TokenType_ {
     TOKEN_FUN,               //函数
     TOKEN_COMMA,             //逗号
                              /*以上是操作符，在表达式解析时使用*/
-    TOKEN_INVALID, //"invalid token"
+                             
+    TOKEN_INVALID,           //"invalid token"
     TOKEN_RESERVED_WORD,     //sql 中的保留字，比如 create,set,where 等等
     TOKEN_WORD,              //非保留字的词
     TOKEN_UNENDED_SRING,     //没有结尾的字符串
